@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.js": "/backstage-app-client/static/js/main.9db57ccc.js",
+    "main.js": "/backstage-app-client/static/js/main.f7bba260.js",
     "static/js/453.419a5d54.chunk.js": "/backstage-app-client/static/js/453.419a5d54.chunk.js",
     "index.html": "/backstage-app-client/index.html",
-    "main.9db57ccc.js.map": "/backstage-app-client/static/js/main.9db57ccc.js.map",
+    "main.f7bba260.js.map": "/backstage-app-client/static/js/main.f7bba260.js.map",
     "453.419a5d54.chunk.js.map": "/backstage-app-client/static/js/453.419a5d54.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.9db57ccc.js"
+    "static/js/main.f7bba260.js"
   ]
 }
