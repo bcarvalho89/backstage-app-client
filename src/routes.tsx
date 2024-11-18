@@ -6,7 +6,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 
 const AppRoutes: React.FC = () => {
   return (
-    <Router>
+    <Router basename={process.env.REACT_APP_BASE_URL}>
       <Routes>
         <Route
           path="/"

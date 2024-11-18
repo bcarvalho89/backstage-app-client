@@ -1,6 +1,7 @@
 {
   "name": "client",
   "version": "0.1.0",
+  "homepage": "https://bcarvalho89.github.io/backstage-app-client",
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.11.10",
@@ -26,7 +27,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -48,6 +51,6 @@
   },
   "devDependencies": {
     "@types/react-router-dom": "^5.3.3",
-    "typescript": "^5.6.3"
+    "typescript": "4.6.4"
   }
 }
