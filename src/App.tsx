@@ -1,12 +1,16 @@
-import React, { useEffect } from "react";
-import { ApolloProvider } from "@apollo/client";
-import client from "./apollo/client";
-import AppRoutes from "./routes";
-import { JwtPayload, jwtDecode } from "jwt-decode";
+import '@mantine/core/styles.css';
 
-const App: React.FC = () => {
+import { useEffect } from 'react';
+import { ApolloProvider } from '@apollo/client';
+import { jwtDecode, JwtPayload } from 'jwt-decode';
+import { MantineProvider } from '@mantine/core';
+import client from './apollo/client';
+import { Router } from './Router';
+import { theme } from './theme';
+
+export default function App() {
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('token');
 
     if (token) {
       try {
@@ -14,20 +18,20 @@ const App: React.FC = () => {
         const currentTime = Math.floor(Date.now() / 1000);
 
         if (decoded.exp && decoded.exp < currentTime) {
-          localStorage.removeItem("token");
-          window.location.href = "/login";
+          localStorage.removeItem('token');
+          window.location.href = '/login';
         }
       } catch (error) {
-        localStorage.removeItem("token");
+        localStorage.removeItem('token');
       }
     }
   }, []);
 
   return (
     <ApolloProvider client={client}>
-      <AppRoutes />
+      <MantineProvider theme={theme}>
+        <Router />
+      </MantineProvider>
     </ApolloProvider>
   );
-};
-
-export default App;
+}
