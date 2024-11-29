@@ -1,4 +1,5 @@
 import '@mantine/core/styles.css';
+import './styles.css';
 
 import { useEffect } from 'react';
 import { ApolloProvider } from '@apollo/client';

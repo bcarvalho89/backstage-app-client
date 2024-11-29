@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { gql, useMutation } from '@apollo/client';
+import { IconInfoCircle } from '@tabler/icons-react';
 import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 import {
+  Alert,
   Button,
   Container,
   Group,
@@ -10,6 +12,7 @@ import {
   Paper,
   PasswordInput,
   Stack,
+  Text,
   TextInput,
   Title,
 } from '@mantine/core';
@@ -24,7 +27,8 @@ const LOGIN_MUTATION = gql`
 `;
 
 const Login: React.FC = () => {
-  const [login, { loading }] = useMutation(LOGIN_MUTATION);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [login, { loading, error }] = useMutation(LOGIN_MUTATION);
   const navigate = useNavigate();
 
   const token = localStorage.getItem('token');
@@ -36,11 +40,15 @@ const Login: React.FC = () => {
   }, [navigate, token]);
 
   const form = useForm({
+    mode: 'uncontrolled',
     initialValues: {
       username: '',
       password: '',
     },
-    validate: {},
+    validate: {
+      username: (value) => (value.trim().length === 0 ? 'Digite um usuário' : null),
+      password: (value) => (value.trim().length === 0 ? 'Digite uma senha' : null),
+    },
   });
 
   const handleSubmit = async ({ password, username }: { username: string; password: string }) => {
@@ -53,40 +61,54 @@ const Login: React.FC = () => {
         localStorage.setItem('token', token);
         navigate('/');
       } catch (error) {
-        alert('Invalid token received from server');
+        setErrorMessage('Erro ao realizar o login');
       }
     } catch (error) {
-      alert('Invalid credentials');
+      setErrorMessage('Credenciais inválidas');
     }
   };
 
+  useEffect(() => {
+    if (error) {
+      setErrorMessage(error.graphQLErrors[0].message);
+    } else {
+      setErrorMessage(null);
+    }
+  }, [error]);
+
   return (
-    <Container size={460} my={30}>
-      <Title ta="center" mb={30}>
+    <Container size={490} mt="xl">
+      <Title ta="center" mb="xl">
         Login
       </Title>
 
-      <Paper radius="md" p="xl" withBorder>
+      <Paper withBorder>
+        {errorMessage && (
+          <Alert p="sm" mb="sm" color="yellow" icon={<IconInfoCircle />}>
+            <Text size="sm" c="yellow">
+              {errorMessage}
+            </Text>
+          </Alert>
+        )}
+
         <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
           <Stack>
             <TextInput
-              label="User"
-              value={form.values.username}
-              onChange={(event) => form.setFieldValue('username', event.currentTarget.value)}
-              radius="md"
+              label="Usuário"
+              key={form.key('username')}
+              {...form.getInputProps('username')}
             />
 
             <PasswordInput
-              label="Password"
-              value={form.values.password}
-              onChange={(event) => form.setFieldValue('password', event.currentTarget.value)}
-              radius="md"
+              label="Senha"
+              key={form.key('password')}
+              {...form.getInputProps('password')}
             />
           </Stack>
 
-          <Group mt="xl">
-            <Button type="submit" radius="xl" disabled={loading}>
-              Login
+          <Group mt="lg">
+            <Button type="submit" disabled={loading}>
+              Entrar
             </Button>
             {loading && <Loader type="dots" />}
           </Group>
