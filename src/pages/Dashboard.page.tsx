@@ -1,20 +1,20 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Button, Container, Title } from '@mantine/core';
+import { Link } from 'react-router-dom';
+import { Button, Container } from '@mantine/core';
+import { useAuth } from '@/hooks';
 
 const Dashboard: React.FC = () => {
-  const navigate = useNavigate();
+  const { user, logout } = useAuth();
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    navigate('/login');
+    logout();
   };
 
   return (
     <Container size={460} my={30}>
-      <Title ta="center" mb={30}>
-        Dashboard
-      </Title>
+      <p>{user?.id}</p>
+
+      <Link to="/profile">Minha conta</Link>
 
       <Button onClick={handleLogout}>Logout</Button>
     </Container>

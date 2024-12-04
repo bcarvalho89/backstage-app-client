@@ -1,35 +1,19 @@
-import React from "react";
-import { Navigate } from "react-router-dom";
-import { JwtPayload, jwtDecode } from "jwt-decode";
+import React from 'react';
+import { Navigate, Outlet } from 'react-router-dom';
+import { useAuth } from '@/hooks/useAuth';
 
-interface ProtectedRouteProps {
-  children: JSX.Element;
-}
+const ProtectedRoute: React.FC = () => {
+  const { loading, user } = useAuth();
 
-const isTokenValid = (token: string | null): boolean => {
-  if (!token) return false;
-
-  try {
-    const decoded = jwtDecode<JwtPayload>(token);
-    const currentTime = Math.floor(Date.now() / 1000);
-    if (decoded.exp && decoded.exp < currentTime) {
-      return false;
-    }
-    return true;
-  } catch (error) {
-    return false;
+  if (loading) {
+    return <p>Loading...</p>;
   }
-};
 
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
-  const token = localStorage.getItem("token");
-
-  if (!isTokenValid(token)) {
-    localStorage.removeItem("token");
+  if (!user) {
     return <Navigate to="/login" />;
   }
 
-  return children;
+  return <Outlet />;
 };
 
 export default ProtectedRoute;

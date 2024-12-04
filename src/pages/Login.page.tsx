@@ -17,6 +17,7 @@ import {
   Title,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
+import { useAuth } from '@/hooks';
 
 const LOGIN_MUTATION = gql`
   mutation Login($username: String!, $password: String!) {
@@ -28,16 +29,9 @@ const LOGIN_MUTATION = gql`
 
 const Login: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [login, { loading, error }] = useMutation(LOGIN_MUTATION);
+  const [loginMutation, { loading, error }] = useMutation(LOGIN_MUTATION);
   const navigate = useNavigate();
-
-  const token = localStorage.getItem('token');
-
-  useEffect(() => {
-    if (token) {
-      navigate('/');
-    }
-  }, [navigate, token]);
+  const { login } = useAuth();
 
   const form = useForm({
     mode: 'uncontrolled',
@@ -53,13 +47,15 @@ const Login: React.FC = () => {
 
   const handleSubmit = async ({ password, username }: { username: string; password: string }) => {
     try {
-      const { data } = await login({ variables: { username, password } });
-      const token = data.login.token;
+      const { data } = await loginMutation({ variables: { username, password } });
+      const { token } = data.login;
 
       try {
         jwtDecode(token);
-        localStorage.setItem('token', token);
-        navigate('/');
+
+        await login(token).then(() => {
+          navigate('/');
+        });
       } catch (error) {
         setErrorMessage('Erro ao realizar o login');
       }
