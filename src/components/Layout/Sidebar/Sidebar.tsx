@@ -6,11 +6,6 @@ import classes from './Sidebar.module.css';
 const menuItems: SidebarLinksGroupProps[] = [
   { label: 'Dashboard', icon: IconGauge, links: [{ label: 'Dashboard', link: '/' }] },
   {
-    label: 'Usuários',
-    icon: IconUser,
-    links: [{ label: 'Usuários', link: '/users' }],
-  },
-  {
     label: 'Bandas',
     icon: IconMusic,
     links: [{ label: 'Bandas', link: '/bands' }],
@@ -24,6 +19,12 @@ const menuItems: SidebarLinksGroupProps[] = [
     label: 'Pesquisas de Satisfação',
     icon: IconAward,
     links: [{ label: 'Pesquisas de Satisfação', link: '/surveys' }],
+    showDivisor: true,
+  },
+  {
+    label: 'Usuários',
+    icon: IconUser,
+    links: [{ label: 'Usuários', link: '/users' }],
   },
 ];
 

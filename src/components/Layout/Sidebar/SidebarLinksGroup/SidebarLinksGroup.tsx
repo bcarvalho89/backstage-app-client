@@ -14,10 +14,11 @@ export interface SidebarLinksGroupProps {
   icon: React.FC<any>;
   label: string;
   links: SidebarLinkProps[];
+  showDivisor?: boolean;
 }
 
 export function SidebarLinksGroup(props: SidebarLinksGroupProps) {
-  const { icon: Icon, label, links } = props;
+  const { icon: Icon, label, links, showDivisor } = props;
   const [opened, setOpened] = useState(false);
 
   const isSingleItem = links.length === 1;
@@ -54,6 +55,7 @@ export function SidebarLinksGroup(props: SidebarLinksGroupProps) {
         </Group>
       </UnstyledButton>
       {!isSingleItem ? <Collapse in={opened}>{items}</Collapse> : null}
+      {showDivisor && <div className={classes.divisor} />}
     </>
   );
 }

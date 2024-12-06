@@ -40,3 +40,9 @@
 .chevron {
   transition: transform 200ms ease;
 }
+
+.divisor {
+  margin: var(--mantine-spacing-md) 0;
+  background-color: light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+  height: 1px;
+}
