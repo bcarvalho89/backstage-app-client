@@ -2,6 +2,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from '@/hooks';
 import Sidebar from './Layout/Sidebar/Sidebar';
 import Topbar from './Layout/Topbar/Topbar';
+import classes from './AppLayout.module.css';
 
 export default function AppLayout() {
   const { loading, user } = useAuth();
@@ -15,11 +16,13 @@ export default function AppLayout() {
   }
 
   return (
-    <div>
+    <>
       <Topbar />
       <Sidebar />
 
-      <Outlet />
-    </div>
+      <main className={classes.main}>
+        <Outlet />
+      </main>
+    </>
   );
 }

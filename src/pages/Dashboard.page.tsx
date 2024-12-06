@@ -1,24 +1,9 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Button, Container } from '@mantine/core';
-import { useAuth } from '@/hooks';
+import { Title } from '@mantine/core';
 
-const Dashboard: React.FC = () => {
-  const { user, logout } = useAuth();
-
-  const handleLogout = () => {
-    logout();
-  };
-
+export default function Dashboard() {
   return (
-    <Container size={460} my={30}>
-      <p>{user?.id}</p>
-
-      <Link to="/profile">Minha conta</Link>
-
-      <Button onClick={handleLogout}>Logout</Button>
-    </Container>
+    <>
+      <Title>Dashboard</Title>
+    </>
   );
-};
-
-export default Dashboard;
+}
