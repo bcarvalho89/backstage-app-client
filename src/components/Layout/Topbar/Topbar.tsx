@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { IconLogout, IconSettings } from '@tabler/icons-react';
+import { IconLogout, IconUser } from '@tabler/icons-react';
 import cx from 'clsx';
 import { Avatar, Group, Menu, Text, UnstyledButton } from '@mantine/core';
 import InternalLink from '@/components/InternalLink';
@@ -8,14 +8,8 @@ import { useAuth } from '@/hooks';
 import classes from './Topbar.module.css';
 
 export default function Topbar() {
-  const { logout } = useAuth();
+  const { user, logout } = useAuth();
   const [userMenuOpened, setUserMenuOpened] = useState(false);
-
-  const user = {
-    avatar: 'https://avatars.githubusercontent.com/u/8310877?v=4&size=64',
-    name: 'Bruno Carvalho',
-    email: 'bruno@brunocarvalho.me',
-  };
 
   return (
     <header className={classes.header}>
@@ -35,15 +29,15 @@ export default function Topbar() {
           <Menu.Target>
             <UnstyledButton className={cx(classes.user, { [classes.userActive]: userMenuOpened })}>
               <Group>
-                <Avatar src={user.avatar} radius="xl" />
+                <Avatar src={user?.avatar} radius="xl" />
 
                 <div style={{ flex: 1 }}>
                   <Text size="sm" fw={500}>
-                    {user.name}
+                    {user?.name}
                   </Text>
 
                   <Text c="dimmed" size="xs">
-                    {user.email}
+                    {user?.email}
                   </Text>
                 </div>
               </Group>
@@ -53,9 +47,7 @@ export default function Topbar() {
             <Menu.Label>Configurações</Menu.Label>
 
             <InternalLink to="profile">
-              <Menu.Item leftSection={<IconSettings size={16} stroke={1.5} />}>
-                Configurações da conta
-              </Menu.Item>
+              <Menu.Item leftSection={<IconUser size={16} stroke={1.5} />}>Minha conta</Menu.Item>
             </InternalLink>
 
             <Menu.Divider />
