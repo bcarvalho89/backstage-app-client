@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { Title } from '@mantine/core';
 import { useAuth } from '@/hooks';
+import Topbar from './Layout/Topbar/Topbar';
 
 export default function AppLayout() {
   const { loading, user } = useAuth();
@@ -15,9 +15,8 @@ export default function AppLayout() {
 
   return (
     <div>
-      <Title ta="center" mb={30}>
-        Dashboard
-      </Title>
+      <Topbar />
+
       <Outlet />
     </div>
   );
