@@ -7,7 +7,7 @@ export default function InternalLink(props: InternalLinkProps) {
   const { children, ...otherProps } = props;
 
   return (
-    <NavLink style={{ textDecoration: 'none' }} {...otherProps}>
+    <NavLink {...otherProps} style={{ textDecoration: 'none', color: 'inherit' }}>
       {children}
     </NavLink>
   );

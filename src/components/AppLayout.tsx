@@ -1,5 +1,6 @@
 import { Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from '@/hooks';
+import Sidebar from './Layout/Sidebar/Sidebar';
 import Topbar from './Layout/Topbar/Topbar';
 
 export default function AppLayout() {
@@ -16,6 +17,7 @@ export default function AppLayout() {
   return (
     <div>
       <Topbar />
+      <Sidebar />
 
       <Outlet />
     </div>
