@@ -32,7 +32,14 @@ export function SidebarLinksGroup(props: SidebarLinksGroupProps) {
   if (isSingleItem) {
     return (
       <>
-        <InternalLink className={cx(classes.control)} to={links[0].link}>
+        <InternalLink
+          className={({ isActive }) => {
+            return cx(classes.control, {
+              [classes.active]: isActive,
+            });
+          }}
+          to={links[0].link}
+        >
           <ThemeIcon variant="light" size={30} mr="md">
             <Icon size={18} />
           </ThemeIcon>
