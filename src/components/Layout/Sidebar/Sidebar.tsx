@@ -4,27 +4,27 @@ import { SidebarLinksGroup, SidebarLinksGroupProps } from './SidebarLinksGroup/S
 import classes from './Sidebar.module.css';
 
 const menuItems: SidebarLinksGroupProps[] = [
-  { label: 'Dashboard', icon: IconGauge, links: [{ label: 'Dashboard', link: '/' }] },
+  { label: 'Dashboard', icon: IconGauge, link: '/' },
   {
     label: 'Bandas',
     icon: IconMusic,
-    links: [{ label: 'Bandas', link: '/bands' }],
+    link: '/bands',
   },
   {
     label: 'Apresentações',
     icon: IconCalendarEvent,
-    links: [{ label: 'Apresentações', link: '/shows' }],
+    link: '/shows',
   },
   {
     label: 'Pesquisas de Satisfação',
     icon: IconAward,
-    links: [{ label: 'Pesquisas de Satisfação', link: '/surveys' }],
+    link: '/surveys',
     showDivisor: true,
   },
   {
     label: 'Usuários',
     icon: IconUser,
-    links: [{ label: 'Usuários', link: '/users' }],
+    link: '/users',
   },
 ];
 

@@ -10,26 +10,17 @@ interface SidebarLinkProps {
   link: string;
 }
 
-export interface SidebarLinksGroupProps {
+export interface SidebarLinksGroupProps extends SidebarLinkProps {
   icon: React.FC<any>;
-  label: string;
-  links: SidebarLinkProps[];
+  submenu?: SidebarLinkProps[];
   showDivisor?: boolean;
 }
 
 export function SidebarLinksGroup(props: SidebarLinksGroupProps) {
-  const { icon: Icon, label, links, showDivisor } = props;
+  const { icon: Icon, label, submenu, showDivisor, link } = props;
   const [opened, setOpened] = useState(false);
 
-  const isSingleItem = links.length === 1;
-
-  const items = links.map((link) => (
-    <InternalLink to={link.link} key={link.label} className={classes.link}>
-      {link.label}
-    </InternalLink>
-  ));
-
-  if (isSingleItem) {
+  if (!submenu) {
     return (
       <>
         <InternalLink
@@ -38,7 +29,7 @@ export function SidebarLinksGroup(props: SidebarLinksGroupProps) {
               [classes.active]: isActive,
             });
           }}
-          to={links[0].link}
+          to={link}
         >
           <ThemeIcon variant="light" size={30} mr="md">
             <Icon size={18} />
@@ -49,6 +40,12 @@ export function SidebarLinksGroup(props: SidebarLinksGroupProps) {
       </>
     );
   }
+
+  const items = submenu.map((link) => (
+    <InternalLink to={link.link} key={link.label} className={classes.link}>
+      {link.label}
+    </InternalLink>
+  ));
 
   return (
     <>
