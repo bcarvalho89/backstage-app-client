@@ -1,6 +1,7 @@
 .control {
   font-weight: 500;
-  display: block;
+  display: flex;
+  align-items: center;
   width: 100%;
   padding: var(--mantine-spacing-xs) var(--mantine-spacing-md);
   color: var(--mantine-color-text);
@@ -38,6 +39,7 @@
 }
 
 .chevron {
+  margin-left: auto;
   transition: transform 200ms ease;
 }
 

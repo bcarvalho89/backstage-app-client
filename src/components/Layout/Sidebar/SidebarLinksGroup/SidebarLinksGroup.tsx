@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { IconChevronRight } from '@tabler/icons-react';
 import cx from 'clsx';
-import { Box, Collapse, Group, ThemeIcon, UnstyledButton } from '@mantine/core';
+import { Collapse, Group, ThemeIcon, UnstyledButton } from '@mantine/core';
 import InternalLink from '@/components/InternalLink';
 import classes from './SidebarLinksGroup.module.css';
 
@@ -29,32 +29,40 @@ export function SidebarLinksGroup(props: SidebarLinksGroupProps) {
     </InternalLink>
   ));
 
+  if (isSingleItem) {
+    return (
+      <>
+        <InternalLink className={cx(classes.control)} to={links[0].link}>
+          <ThemeIcon variant="light" size={30} mr="md">
+            <Icon size={18} />
+          </ThemeIcon>
+          <span>{label}</span>
+        </InternalLink>
+        {showDivisor && <div className={classes.divisor} />}
+      </>
+    );
+  }
+
   return (
     <>
       <UnstyledButton
-        onClick={() => !isSingleItem && setOpened((o) => !o)}
+        onClick={() => setOpened((o) => !o)}
         className={cx(classes.control, { [classes.active]: opened })}
       >
-        <Group justify="space-between" gap={0}>
-          <Box style={{ display: 'flex', alignItems: 'center' }}>
-            <ThemeIcon variant="light" size={30}>
-              <Icon size={18} />
-            </ThemeIcon>
-            <Box ml="md">
-              {isSingleItem ? <InternalLink to={links[0].link}>{label}</InternalLink> : label}
-            </Box>
-          </Box>
-          {!isSingleItem && (
-            <IconChevronRight
-              className={classes.chevron}
-              stroke={1.5}
-              size={16}
-              style={{ transform: opened ? 'rotate(-90deg)' : 'none' }}
-            />
-          )}
+        <Group justify="space-between" gap={0} style={{ width: '100%' }}>
+          <ThemeIcon variant="light" size={30} mr="md">
+            <Icon size={18} />
+          </ThemeIcon>
+          <span>{label}</span>
+          <IconChevronRight
+            className={classes.chevron}
+            stroke={1.5}
+            size={16}
+            style={{ transform: opened ? 'rotate(-90deg)' : 'none' }}
+          />
         </Group>
       </UnstyledButton>
-      {!isSingleItem ? <Collapse in={opened}>{items}</Collapse> : null}
+      <Collapse in={opened}>{items}</Collapse>
       {showDivisor && <div className={classes.divisor} />}
     </>
   );
