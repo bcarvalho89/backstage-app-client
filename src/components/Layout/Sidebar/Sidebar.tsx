@@ -6,9 +6,9 @@ import classes from './Sidebar.module.css';
 const menuItems: SidebarLinksGroupProps[] = [
   { label: 'Dashboard', icon: IconGauge, link: '/' },
   {
-    label: 'Bandas',
+    label: 'Minha Banda',
     icon: IconMusic,
-    link: '/bands',
+    link: '/my-band',
   },
   {
     label: 'Apresentações',
