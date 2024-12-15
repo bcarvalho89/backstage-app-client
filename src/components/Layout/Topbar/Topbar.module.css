@@ -1,18 +1,9 @@
-.header {
-  top: 0;
-  left: 0;
-  width: 100%;
-  position: fixed;
-  background-color: var(--mantine-color-body);
-  border-bottom: 1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
-  padding: var(--mantine-spacing-xs) var(--mantine-spacing-sm);
-  z-index: 10;
-}
-
 .inner {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 100%;
+  padding: var(--mantine-spacing-xs) var(--mantine-spacing-sm);
 }
 
 .user {

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { IconLogout, IconUser } from '@tabler/icons-react';
 import cx from 'clsx';
-import { Avatar, Group, Menu, Text, UnstyledButton } from '@mantine/core';
+import { Avatar, Box, Group, Menu, Text, UnstyledButton } from '@mantine/core';
 import InternalLink from '@/components/InternalLink';
 import Logo from '@/components/Logo/Logo';
 import { useAuth } from '@/hooks';
@@ -12,52 +12,50 @@ export default function Topbar() {
   const [userMenuOpened, setUserMenuOpened] = useState(false);
 
   return (
-    <header className={classes.header}>
-      <div className={classes.inner}>
-        <InternalLink to="/">
-          <Logo />
-        </InternalLink>
+    <Box className={classes.inner}>
+      <InternalLink to="/">
+        <Logo />
+      </InternalLink>
 
-        <Menu
-          width={260}
-          position="bottom-end"
-          transitionProps={{ transition: 'pop-top-right' }}
-          onClose={() => setUserMenuOpened(false)}
-          onOpen={() => setUserMenuOpened(true)}
-          withinPortal
-        >
-          <Menu.Target>
-            <UnstyledButton className={cx(classes.user, { [classes.userActive]: userMenuOpened })}>
-              <Group>
-                <Avatar src={user?.avatar} radius="xl" />
+      <Menu
+        width={260}
+        position="bottom-end"
+        transitionProps={{ transition: 'pop-top-right' }}
+        onClose={() => setUserMenuOpened(false)}
+        onOpen={() => setUserMenuOpened(true)}
+        withinPortal
+      >
+        <Menu.Target>
+          <UnstyledButton className={cx(classes.user, { [classes.userActive]: userMenuOpened })}>
+            <Group>
+              <Avatar src={user?.avatar} radius="xl" />
 
-                <div style={{ flex: 1 }}>
-                  <Text size="sm" fw={500}>
-                    {user?.name}
-                  </Text>
+              <Box style={{ flex: 1 }}>
+                <Text size="sm" fw={500}>
+                  {user?.name}
+                </Text>
 
-                  <Text c="dimmed" size="xs">
-                    {user?.email}
-                  </Text>
-                </div>
-              </Group>
-            </UnstyledButton>
-          </Menu.Target>
-          <Menu.Dropdown>
-            <Menu.Label>Configurações</Menu.Label>
+                <Text c="dimmed" size="xs">
+                  {user?.email}
+                </Text>
+              </Box>
+            </Group>
+          </UnstyledButton>
+        </Menu.Target>
+        <Menu.Dropdown>
+          <Menu.Label>Configurações</Menu.Label>
 
-            <InternalLink to="profile">
-              <Menu.Item leftSection={<IconUser size={16} stroke={1.5} />}>Minha conta</Menu.Item>
-            </InternalLink>
+          <InternalLink to="profile">
+            <Menu.Item leftSection={<IconUser size={16} stroke={1.5} />}>Minha conta</Menu.Item>
+          </InternalLink>
 
-            <Menu.Divider />
+          <Menu.Divider />
 
-            <Menu.Item onClick={logout} leftSection={<IconLogout size={16} stroke={1.5} />}>
-              Sair
-            </Menu.Item>
-          </Menu.Dropdown>
-        </Menu>
-      </div>
-    </header>
+          <Menu.Item onClick={logout} leftSection={<IconLogout size={16} stroke={1.5} />}>
+            Sair
+          </Menu.Item>
+        </Menu.Dropdown>
+      </Menu>
+    </Box>
   );
 }
