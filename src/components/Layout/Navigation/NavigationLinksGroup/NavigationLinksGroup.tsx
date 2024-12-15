@@ -3,20 +3,20 @@ import { IconChevronRight } from '@tabler/icons-react';
 import cx from 'clsx';
 import { Collapse, Group, ThemeIcon, UnstyledButton } from '@mantine/core';
 import InternalLink from '@/components/InternalLink';
-import classes from './SidebarLinksGroup.module.css';
+import classes from './NavigationLinksGroup.module.css';
 
-interface SidebarLinkProps {
+interface NavigationLinkProps {
   label: string;
   link: string;
 }
 
-export interface SidebarLinksGroupProps extends SidebarLinkProps {
+export interface NavigationLinksGroupProps extends NavigationLinkProps {
   icon: React.FC<any>;
-  submenu?: SidebarLinkProps[];
+  submenu?: NavigationLinkProps[];
   showDivisor?: boolean;
 }
 
-export function SidebarLinksGroup(props: SidebarLinksGroupProps) {
+export function NavigationLinksGroup(props: NavigationLinksGroupProps) {
   const { icon: Icon, label, submenu, showDivisor, link } = props;
   const [opened, setOpened] = useState(false);
 

@@ -1,16 +1,3 @@
-.navbar {
-  position: fixed;
-  left: 0;
-  top: 0;
-  background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-6));
-  height: 100%;
-  width: 250px;
-  padding: 80px var(--mantine-spacing-md) 0;
-  display: flex;
-  flex-direction: column;
-  border-right: 1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
-}
-
 .links {
   flex: 1;
   margin-left: calc(var(--mantine-spacing-md) * -1);

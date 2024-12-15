@@ -1,9 +1,12 @@
 import { IconAward, IconCalendarEvent, IconGauge, IconMusic, IconUser } from '@tabler/icons-react';
-import { ScrollArea } from '@mantine/core';
-import { SidebarLinksGroup, SidebarLinksGroupProps } from './SidebarLinksGroup/SidebarLinksGroup';
-import classes from './Sidebar.module.css';
+import { Box, ScrollArea } from '@mantine/core';
+import {
+  NavigationLinksGroup,
+  NavigationLinksGroupProps,
+} from './NavigationLinksGroup/NavigationLinksGroup';
+import classes from './Navigation.module.css';
 
-const menuItems: SidebarLinksGroupProps[] = [
+const menuItems: NavigationLinksGroupProps[] = [
   { label: 'Dashboard', icon: IconGauge, link: '/' },
   {
     label: 'Minha Banda',
@@ -28,14 +31,12 @@ const menuItems: SidebarLinksGroupProps[] = [
   },
 ];
 
-export default function Sidebar() {
-  const links = menuItems.map((item) => <SidebarLinksGroup {...item} key={item.label} />);
+export default function Navigation() {
+  const links = menuItems.map((item) => <NavigationLinksGroup {...item} key={item.label} />);
 
   return (
-    <nav className={classes.navbar}>
-      <ScrollArea className={classes.links}>
-        <div className={classes.linksInner}>{links}</div>
-      </ScrollArea>
-    </nav>
+    <ScrollArea className={classes.links}>
+      <Box className={classes.linksInner}>{links}</Box>
+    </ScrollArea>
   );
 }
