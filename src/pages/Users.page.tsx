@@ -1,7 +1,8 @@
+import { gql, useQuery } from '@apollo/client';
 import { IconDotsVertical } from '@tabler/icons-react';
 import {
   Avatar,
-  Badge,
+  // Badge,
   Button,
   Group,
   Menu,
@@ -10,25 +11,37 @@ import {
   Title,
   useMantineTheme,
 } from '@mantine/core';
+import { Role, User } from '@/apollo/types/User';
 import Card from '@/components/Card/Card';
+import { useHasPermission } from '@/hooks/useHasPermission';
 
-const data = [
-  {
-    id: 'abc123',
-    username: 'admin',
-    name: 'Bruno Gomes de Carvalho',
-    email: 'bruno@brunocarvalho.me',
-    avatar: 'https://avatars.githubusercontent.com/u/8310877?v=4&size=200',
-    role: 'Administrator',
-    lastActive: '2 days ago',
-    active: true,
-  },
-];
+const GET_USERS = gql`
+  query GetUsers {
+    getUsers {
+      avatar
+      email
+      name
+      role
+      username
+    }
+  }
+`;
 
 export default function Users() {
   const theme = useMantineTheme();
+  const canDeleteUser = useHasPermission(Role.ADMIN);
 
-  const rows = data.map((item) => (
+  const { data, loading: queryLoading } = useQuery<{ getUsers: User[] }>(GET_USERS);
+
+  if (queryLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (!data) {
+    return null;
+  }
+
+  const rows = data.getUsers.map((item) => (
     <Table.Tr key={item.name}>
       <Table.Td>
         <Group gap="sm">
@@ -45,9 +58,10 @@ export default function Users() {
       </Table.Td>
 
       <Table.Td>{item.role}</Table.Td>
-      <Table.Td>{item.lastActive}</Table.Td>
+      <Table.Td>-</Table.Td>
       <Table.Td>
-        {item.active ? (
+        -
+        {/*item.active ? (
           <Badge fullWidth variant="light">
             Active
           </Badge>
@@ -55,7 +69,7 @@ export default function Users() {
           <Badge color="gray" fullWidth variant="light">
             Disabled
           </Badge>
-        )}
+        )*/}
       </Table.Td>
       <Table.Td>
         <Menu
@@ -71,7 +85,7 @@ export default function Users() {
           </Menu.Target>
           <Menu.Dropdown>
             <Menu.Item>Editar</Menu.Item>
-            <Menu.Item>Excluir</Menu.Item>
+            {canDeleteUser && <Menu.Item>Excluir</Menu.Item>}
           </Menu.Dropdown>
         </Menu>
       </Table.Td>
