@@ -7,22 +7,18 @@ import { AuthContext } from './AuthContext';
 const GET_USER_DATA = gql`
   query GetUserData {
     currentUser {
+      avatar
+      email
       id
+      name
+      role
       username
     }
   }
 `;
 
-const dummyUser: User = {
-  id: 'abc123',
-  username: 'admin',
-  name: 'Bruno Gomes de Carvalho',
-  email: 'bruno@brunocarvalho.me',
-  avatar: 'https://avatars.githubusercontent.com/u/8310877?v=4&size=200',
-};
-
 export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(dummyUser);
+  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -33,7 +29,9 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
   } = useQuery(GET_USER_DATA, {
     skip: !localStorage.getItem('token'),
     onCompleted: (data) => {
-      // setUser(data?.currentUser || null);
+      if (data) {
+        setUser(data.currentUser);
+      }
       setLoading(false);
     },
     onError: () => {
