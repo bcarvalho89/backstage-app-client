@@ -156,7 +156,7 @@ this in the docs: http://dev.apollodata.com/core/fragments.html#unique-names`):u
       username
     }
   }
-`,iA=({children:e})=>{const[t,r]=E.useState(null),[n,s]=E.useState(!0),a=yo(),{error:u,refetch:c,loading:d}=lT(oA,{skip:!localStorage.getItem("token"),onCompleted:v=>{v&&r(v.currentUser),s(!1)},onError:()=>{s(!1),h()}}),p=async v=>{localStorage.setItem("token",v),s(!0);try{await c()}finally{s(!1)}},h=()=>{localStorage.removeItem("token"),r(null),a("/login")};return E.useEffect(()=>{d||s(!1)},[d]),_.jsx(wS.Provider,{value:{user:t,loading:n,error:u,login:p,logout:h},children:e})},ec=()=>{const e=E.useContext(wS);if(!e)throw new Error("useAuth must be used within an AuthProvider");return e};/**
+`,iA=({children:e})=>{const[t,r]=E.useState(null),[n,s]=E.useState(!0),a=yo(),{error:u,refetch:c,loading:d}=lT(oA,{fetchPolicy:"no-cache",skip:!localStorage.getItem("token"),onCompleted:v=>{v&&r(v.currentUser),s(!1)},onError:()=>{s(!1),h()}}),p=async v=>{localStorage.setItem("token",v),s(!0);try{await c()}finally{s(!1)}},h=()=>{localStorage.removeItem("token"),r(null),a("/login")};return E.useEffect(()=>{d||s(!1)},[d]),_.jsx(wS.Provider,{value:{user:t,loading:n,error:u,login:p,logout:h},children:e})},ec=()=>{const e=E.useContext(wS);if(!e)throw new Error("useAuth must be used within an AuthProvider");return e};/**
  * @license @tabler/icons-react v3.23.0 - MIT
  *
  * This source code is licensed under the MIT license.
