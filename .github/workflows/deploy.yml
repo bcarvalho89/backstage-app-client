@@ -10,6 +10,7 @@ permissions:
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
+    environment: github-pages
 
     steps:
       - name: Checkout
@@ -25,10 +26,10 @@ jobs:
       - name: Build
         run: yarn run build
         env:
-          VITE_API_URL: 'https://backstage-app-server.onrender.com'
-          VITE_BASE_URL: '/backstage-app-client'
-          # REACT_APP_BASE_URL: ${{ secrets.REACT_APP_BASE_URL }}
-          # REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
+          VITE_API_URL: ${{ secrets.VITE_API_URL }}
+          VITE_BASE_URL: ${{ secrets.VITE_BASE_URL }}
+          VITE_PUBLIC_POSTHOG_KEY: ${{ secrets.VITE_PUBLIC_POSTHOG_KEY }}
+          VITE_PUBLIC_POSTHOG_HOST: ${{ secrets.VITE_PUBLIC_POSTHOG_HOST }}
       #- name: Test
       #  run: npm test
       - name: Deploy🚀

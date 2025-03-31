@@ -14,11 +14,16 @@ export interface NavigationLinksGroupProps extends NavigationLinkProps {
   icon: React.FC<any>;
   submenu?: NavigationLinkProps[];
   showDivisor?: boolean;
+  disabled?: boolean;
 }
 
 export function NavigationLinksGroup(props: NavigationLinksGroupProps) {
-  const { icon: Icon, label, submenu, showDivisor, link } = props;
+  const { disabled = false, icon: Icon, label, submenu, showDivisor, link } = props;
   const [opened, setOpened] = useState(false);
+
+  if (disabled) {
+    return null;
+  }
 
   if (!submenu) {
     return (
