@@ -27,6 +27,7 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
     refetch,
     loading: queryLoading,
   } = useQuery(GET_USER_DATA, {
+    fetchPolicy: 'no-cache',
     skip: !localStorage.getItem('token'),
     onCompleted: (data) => {
       if (data) {
