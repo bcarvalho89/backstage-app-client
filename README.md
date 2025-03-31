@@ -1,9 +1,26 @@
-# Mantine Vite template
+# Backstage - Client
+
+## Demo
+
+- [Demo](https://bcarvalho89.github.io/backstage-app-client)
+- User: demo
+- Pass: demo
 
 ## Features
 
-This template comes with the following features:
+- Auth
+- Users manangement based on roles
+- Band management
+  -- Musics and band members management
+- Shows management
+  -- Relation between music and show
+- Surveys
+  -- Relation between show and survey
 
+## Stack and Technologies
+
+- [React](https://reactjs.com)
+- [Apollo Client](https://www.apollographql.com/docs/react)
 - [PostCSS](https://postcss.org/) with [mantine-postcss-preset](https://mantine.dev/styles/postcss-preset)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Storybook](https://storybook.js.org/)
