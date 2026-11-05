@@ -1,5 +1,7 @@
 # Backstage - Client
 
+Frontend for a band management app: members, songs, shows and surveys, with role-based access. Not related to Spotify Backstage.
+
 ## Demo
 
 - [Demo](https://bcarvalho89.github.io/backstage-app-client)
@@ -8,44 +10,21 @@
 
 ## Features
 
-- Auth
-- Users manangement based on roles
+- Authentication
+- User management based on roles
 - Band management
-  -- Musics and band members management
-- Shows management
-  -- Relation between music and show
+  - Songs and band members
+- Show management
+  - Link songs to shows
 - Surveys
-  -- Relation between show and survey
+  - Link surveys to shows
 
-## Stack and Technologies
+## Stack and technologies
 
-- [React](https://reactjs.com)
+- [React](https://react.dev)
 - [Apollo Client](https://www.apollographql.com/docs/react)
-- [PostCSS](https://postcss.org/) with [mantine-postcss-preset](https://mantine.dev/styles/postcss-preset)
+- [Mantine](https://mantine.dev) with PostCSS
 - [TypeScript](https://www.typescriptlang.org/)
 - [Storybook](https://storybook.js.org/)
-- [Vitest](https://vitest.dev/) setup with [React Testing Library](https://testing-library.com/docs/react-testing-library/intro)
-- ESLint setup with [eslint-config-mantine](https://github.com/mantinedev/eslint-config-mantine)
-
-## npm scripts
-
-## Build and dev scripts
-
-- `dev` – start development server
-- `build` – build production version of the app
-- `preview` – locally preview production build
-
-### Testing scripts
-
-- `typecheck` – checks TypeScript types
-- `lint` – runs ESLint
-- `prettier:check` – checks files with Prettier
-- `vitest` – runs vitest tests
-- `vitest:watch` – starts vitest watch
-- `test` – runs `vitest`, `prettier:check`, `lint` and `typecheck` scripts
-
-### Other scripts
-
-- `storybook` – starts storybook dev server
-- `storybook:build` – build production storybook bundle to `storybook-static`
-- `prettier:write` – formats all files with Prettier
+- [Vitest](https://vitest.dev/) with [React Testing Library](https://testing-library.com/docs/react-testing-library/intro)
+- ESLint and Prettier
